@@ -2,6 +2,8 @@ package com.example.sample.fakeDataBaseTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,9 @@ public class fakeDBTest {
         Transaction transaction1 = new Transaction(null, null, null);
         transaction1.setId(1L);
         transaction1.setAmount(120L);
-        customerService.customerTransactionMap.put(customer1, transaction1);
+        ArrayList<Transaction> firstListTransaction = new ArrayList<Transaction>();
+        firstListTransaction.add(transaction1);
+        customerService.customerTransactionMap.put(customer1, firstListTransaction);
 
         Customer customer2 = new Customer();
         customer2.setId(2L);
@@ -33,7 +37,9 @@ public class fakeDBTest {
         Transaction transaction2 = new Transaction(null, null, null);
         transaction2.setId(2L);
         transaction2.setAmount(60L);
-        customerService.customerTransactionMap.put(customer2, transaction2);
+        ArrayList<Transaction> secondListTransaction = new ArrayList<Transaction>();
+        secondListTransaction.add(transaction2);
+        customerService.customerTransactionMap.put(customer2, secondListTransaction);
 
         Customer customer3 = new Customer();
         customer3.setId(3L);
@@ -42,7 +48,9 @@ public class fakeDBTest {
         Transaction transaction3 = new Transaction(null, null, null);
         transaction3.setId(3L);
         transaction3.setAmount(30L);
-        customerService.customerTransactionMap.put(customer3, transaction3);
+        ArrayList<Transaction> thirdListTransaction = new ArrayList<Transaction>();
+        thirdListTransaction.add(transaction3);
+        customerService.customerTransactionMap.put(customer3, thirdListTransaction);
     }
     @BeforeEach
     public void setUp(){
@@ -52,7 +60,7 @@ public class fakeDBTest {
 
     // 0. since we use lombok, we dont need to check entity or pojo itself.
     // if further, facing data type converting problem, lombok may be the reason of it. so do that check here.
-    
+
 
     // 1. fake DB initalize check. Check if data is inserted correctly.
     @Test
@@ -68,7 +76,7 @@ public class fakeDBTest {
     public void checkTransaction(){ // by checking if exists.
         for(Customer customer: customerService.customerTransactionMap.keySet()){
             if(customer.getId() == 1L){
-                assertEquals(120L, customerService.customerTransactionMap.get(customer).getAmount());
+                assertEquals(120L, customerService.customerTransactionMap.get(customer).stream().mapToLong(t -> t.getAmount()).sum());
             }
         }
     }

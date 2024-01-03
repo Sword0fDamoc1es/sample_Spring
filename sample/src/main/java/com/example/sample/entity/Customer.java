@@ -12,4 +12,7 @@ public class Customer {
     private String lastName;
     private List<Transaction> transactions;
     private Long rewards;
+    public void addTransaction(Transaction transaction) {
+        transactions.add(transaction);
+    }
 }

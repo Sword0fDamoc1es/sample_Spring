@@ -13,7 +13,7 @@ import com.example.sample.entity.Transaction;
 public class CustomerService {
     
     // fake DB, this is public right now, but when switching to DB, it needs authentication, thus hidden.
-    public Map<Customer,Transaction> customerTransactionMap = new HashMap<>();
+    public Map<Customer,List<Transaction>> customerTransactionMap = new HashMap<>();
     // insert fake data
     // public CustomerService(){
     //     Customer customer1 = new Customer();
