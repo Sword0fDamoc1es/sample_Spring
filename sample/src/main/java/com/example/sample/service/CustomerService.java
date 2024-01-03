@@ -19,6 +19,7 @@ public class CustomerService {
     // fake DB, this is public right now, but when switching to DB, it needs authentication, thus hidden.
     public Map<Customer,List<Transaction>> customerTransactionMap = new HashMap<>();
     
+    // this is the function to set up fake data for testing.
     public void setUpFixedFakeData(){
         DateGenerator dateGenerator = new DateGenerator();
         Customer customer1 = new Customer();
@@ -55,6 +56,8 @@ public class CustomerService {
         customerTransactionMap.put(customer3, customer3.getTransactions());
     }
 
+
+    // this is the function to get rewards of a customer.
     public Long getRewards(Long CustomerId){
         // -404 is means customer not found or no transaction of the customer.
         Long rewards = -404L;
@@ -66,6 +69,8 @@ public class CustomerService {
         return rewards;
     }
 
+    // this function works on a list of transactions.
+    // can later be used to calculate transactions in a time period but not from same customer.
     public Long calculateRewards(List<Transaction> transactions){
         // Long rewards = 0L;
         // for(Transaction transaction: transactions){
@@ -74,12 +79,16 @@ public class CustomerService {
         // return rewards;
 
         // using lamda expression to simplify codes.
+
         return transactions.stream().mapToLong(transaction -> calculateRewardsForTransaction(transaction)).sum();
 
     }
+
+    // this function works on a single transaction.
     public Long calculateRewardsForTransaction(Transaction transaction) {
         Long amount = transaction.getAmount();
         Long rewards = 0L;
+        
         if (amount > 50 && amount <= 100) {
             rewards += amount - 50;
         }

@@ -17,14 +17,4 @@ public class Transaction {
         this.transactionDate = transactionDate;
     }
 
-    // public Long calculateRewards() {
-    //     Long rewards = 0L;
-    //     if (amount > 50 && amount <= 100) {
-    //         rewards += amount - 50;
-    //     }
-    //     if (amount > 100) {
-    //         rewards += 2 * (amount - 100) + 50;
-    //     }
-    //     return rewards;
-    // }
 }

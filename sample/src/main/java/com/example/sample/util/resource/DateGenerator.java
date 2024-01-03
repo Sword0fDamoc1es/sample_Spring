@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+// this class is used to generate random dates
 public class DateGenerator {
 
+    // this function is used to generate a list of random dates
     public List<LocalDateTime> generateRandomDates(int numberOfDates) {
         LocalDateTime threeMonthsAgo = LocalDateTime.now().minusMonths(3);
         LocalDateTime now = LocalDateTime.now();
@@ -21,6 +23,7 @@ public class DateGenerator {
         return randomDates;
     }
 
+    // this function is used to generate random dates between a period of time. Current demand is 3 months.
     private LocalDateTime getRandomDateBetween(LocalDateTime start, LocalDateTime end) {
         long startSeconds = start.toEpochSecond(ZoneOffset.UTC);
         long endSeconds = end.toEpochSecond(ZoneOffset.UTC);

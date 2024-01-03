@@ -60,6 +60,7 @@ public class CustomerServiceTest {
 
     @Test
     public void checkRewards(){
+        // check rewards for each transaction. if all equals, then pass.
         for(Customer customer: customerService.customerTransactionMap.keySet()){
             for(Transaction transaction: customer.getTransactions()){
                 assertEquals(transaction.getAmount()>100?(50+2*(transaction.getAmount()-100)):(transaction.getAmount()>50?transaction.getAmount()-50:0), customerService.calculateRewardsForTransaction(transaction));
@@ -68,6 +69,7 @@ public class CustomerServiceTest {
     }
     @Test
     public void checkTotalRewards(){
+        // check total rewards for each customer. if all equals, then pass.
         for(Customer customer: customerService.customerTransactionMap.keySet()){
             assertEquals(customer.getTransactions().stream().mapToLong(transaction -> customerService.calculateRewardsForTransaction(transaction)).sum(), customerService.calculateRewards(customer.getTransactions()));
         }

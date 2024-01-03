@@ -21,13 +21,16 @@ public class CustomerController {
 
     @GetMapping("/{customerId}/rewards")
     public ResponseEntity<CustomerResponse> getRewards(@PathVariable("customerId") String customerIdStr) {
-        try{
+        try{ // using try catch block to handle NumberFormatException.
             Long customerId = Long.parseLong(customerIdStr);
             CustomerResponse customerResponse = new CustomerResponse();
             customerResponse.setCid(customerId);
 
             Long rewards = customerService.getRewards(customerId);
+            // in service function, we return -404L if customer not found or no transaction of the customer.
+
             if(rewards == -404L){
+                // create corrsponding response.
                 customerResponse.setStatus(404);
                 customerResponse.setRewards(0L);
                 customerResponse.setMessage("Customer not found or no transaction of the customer.");
@@ -40,13 +43,14 @@ public class CustomerController {
                 return ResponseEntity.status(200).body(customerResponse);
             }
         }catch(NumberFormatException e){
+            // use the self defined exception handler to handle NumberFormatException.
             GlocalExceptionHandler glocalExceptionHandler = new GlocalExceptionHandler();
             return glocalExceptionHandler.handleNumberFormatException(e);
         }
 
     }
     @GetMapping("/${initialize.initHash}/data")
-    public void initalizeFixedFakeDB() {
+    public void initalizeFixedFakeDB() { // the parameter is defined in application.properties.
         customerService.setUpFixedFakeData();
     }
     

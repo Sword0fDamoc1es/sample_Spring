@@ -15,6 +15,7 @@ import com.example.sample.service.CustomerService;
 
 @SpringBootTest
 public class fakeDBTest {
+    // tests for fakeDB contructions.
     @Autowired
     private CustomerService customerService;
 

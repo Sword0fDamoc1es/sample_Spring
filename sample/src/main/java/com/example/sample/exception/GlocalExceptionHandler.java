@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 @ControllerAdvice
 public class GlocalExceptionHandler {
+    // currently this file only handles NumberFormatException.
     private static final Logger logger = LogManager.getLogger(GlocalExceptionHandler.class);
 
     @ExceptionHandler(NumberFormatException.class)
