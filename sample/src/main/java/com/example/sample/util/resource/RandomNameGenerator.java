@@ -1,4 +1,4 @@
-package com.example.sample.resource;
+package com.example.sample.util.resource;
 
 import java.util.Random;
 

@@ -17,9 +17,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.sample.entity.Customer;
 import com.example.sample.entity.Transaction;
-import com.example.sample.resource.DateGenerator;
-import com.example.sample.resource.RandomNameGenerator;
 import com.example.sample.service.CustomerService;
+import com.example.sample.util.resource.DateGenerator;
+import com.example.sample.util.resource.RandomNameGenerator;
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CustomerServiceTest {

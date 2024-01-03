@@ -1,48 +1,59 @@
 package com.example.sample.service;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 import org.springframework.stereotype.Service;
 
 import com.example.sample.entity.Customer;
 import com.example.sample.entity.Transaction;
+import com.example.sample.util.resource.DateGenerator;
 
 @Service
 public class CustomerService {
     
     // fake DB, this is public right now, but when switching to DB, it needs authentication, thus hidden.
     public Map<Customer,List<Transaction>> customerTransactionMap = new HashMap<>();
-    // insert fake data
-    // public CustomerService(){
-    //     Customer customer1 = new Customer();
-    //     customer1.setId(1L);
-    //     customer1.setFirstName("John");
-    //     customer1.setLastName("A");
-    //     Transaction transaction1 = new Transaction(null, null, null);
-    //     transaction1.setId(1L);
-    //     transaction1.setAmount(120L);
-    //     customerTransactionMap.put(customer1, transaction1);
+    
+    public void setUpFixedFakeData(){
+        DateGenerator dateGenerator = new DateGenerator();
+        Customer customer1 = new Customer();
+        customer1.setId(1L);
+        customer1.setFirstName("John");
+        customer1.setLastName("Doe");
+        customer1.setTransactions(new ArrayList<Transaction>());
+        Transaction transaction1 = new Transaction(1L, 120L, dateGenerator.generateRandomDates(1).get(0));
+        Transaction transaction2 = new Transaction(2L, 60L, dateGenerator.generateRandomDates(1).get(0));
+        Transaction transaction3 = new Transaction(3L, 30L, dateGenerator.generateRandomDates(1).get(0));
+        customer1.addTransaction(transaction1);
+        customer1.addTransaction(transaction2);
+        customer1.addTransaction(transaction3);
+        customerTransactionMap.put(customer1, customer1.getTransactions());
 
-    //     Customer customer2 = new Customer();
-    //     customer2.setId(2L);
-    //     customer2.setFirstName("Jane");
-    //     customer2.setLastName("B");
-    //     Transaction transaction2 = new Transaction(null, null, null);
-    //     transaction2.setId(2L);
-    //     transaction2.setAmount(60L);
-    //     customerTransactionMap.put(customer2, transaction2);
+        Customer customer2 = new Customer();
+        customer2.setId(2L);
+        customer2.setFirstName("Jane");
+        customer2.setLastName("Doe");
+        customer2.setTransactions(new ArrayList<Transaction>());
+        Transaction transaction4 = new Transaction(4L, 120L, dateGenerator.generateRandomDates(1).get(0));
+        Transaction transaction5 = new Transaction(5L, 60L, dateGenerator.generateRandomDates(1).get(0));
+        customer2.addTransaction(transaction4);
+        customer2.addTransaction(transaction5);
+        customerTransactionMap.put(customer2, customer2.getTransactions());
 
-    //     Customer customer3 = new Customer();
-    //     customer3.setId(3L);
-    //     customer3.setFirstName("Jack");
-    //     customer3.setLastName("C");
-    //     Transaction transaction3 = new Transaction(null, null, null);
-    //     transaction3.setId(3L);
-    //     transaction3.setAmount(30L);
-    //     customerTransactionMap.put(customer3, transaction3);
-    // }
+        Customer customer3 = new Customer();
+        customer3.setId(3L);
+        customer3.setFirstName("Jack");
+        customer3.setLastName("Doe");
+        customer3.setTransactions(new ArrayList<Transaction>());
+        Transaction transaction6 = new Transaction(6L, 100L, dateGenerator.generateRandomDates(1).get(0));
+        customer3.addTransaction(transaction6);
+        customerTransactionMap.put(customer3, customer3.getTransactions());
+    }
 
     public Long getRewards(Long CustomerId){
         // -404 is means customer not found or no transaction of the customer.
