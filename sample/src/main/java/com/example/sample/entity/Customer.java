@@ -2,8 +2,9 @@ package com.example.sample.entity;
 
 import java.util.List;
 
+// import jakarta.persistence.Entity;
 import lombok.Data;
-
+// @Entity
 @Data
 public class Customer {
     private Long id;

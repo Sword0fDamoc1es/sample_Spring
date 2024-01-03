@@ -2,6 +2,9 @@ package com.example.sample.entity;
 
 import lombok.Data;
 import java.time.*;
+
+// import jakarta.persistence.Entity;
+// @Entity
 @Data
 public class Transaction {
     private Long id;
