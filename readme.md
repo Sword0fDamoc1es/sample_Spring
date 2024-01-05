@@ -1,5 +1,7 @@
 ## README
 -------------
+https://github.com/Sword0fDamoc1es/sample_Spring.git
+
 this is a document showing the design of this sample project.  
 ### target:
 A retailer offers a rewards program to its customers, awarding points based on each recorded purchase. 
